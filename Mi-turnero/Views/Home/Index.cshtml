@@ -1,8 +1,126 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<header class="hero-section" id="inicio">
+	<div class="container">
+		<div class="row align-items-center g-5">
+			<div class="col-lg-6">
+				<h1 class="display-4 fw-black mb-4">Tu Sonrisa, Nuestra Prioridad</h1>
+				<p class="lead text-muted-custom mb-5">Ofrecemos servicios dentales de alta calidad con la mejor tecnología para cuidar de tu salud bucal. Tu bienestar comienza con una sonrisa sana.</p>
+				<div class="d-grid d-md-flex gap-3">
+					<button class="btn btn-primary btn-lg px-5">Reservar Turno</button>
+					<button class="btn btn-outline-primary btn-lg px-5">Ver Servicios</button>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<img alt="Modern Dental Office" class="img-fluid rounded-xl shadow-lg" data-alt="Modern and bright dental clinic office interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2B_G5lCnhP-IXWxzarywiHG2kOLL2KNdWniw7tjrZPzGrdYyRhXxwIWjHsagYWKhC95dLeMAVGrTUC4tYmJo09ZbqDE898yYpcbMs5lwelpRu6BFRC4jqJyHYdYrdpGMtRwvQrkR4w9SJmSRKPPZT2U1wewWFEAy3EeTOFsm4XPJMT6kMGTK_xY2orxN7q7E5uCRxCH0u6g2q_LW5cRIByz1ZgB7OfZdvRytGo2bE48jGQgwW0rF1-6LrenPso8g0iC70weOa4Aau" />
+			</div>
+		</div>
+	</div>
+</header>
+
+<section class="py-5 bg-light" id="servicios">
+	<div class="container py-5">
+		<div class="text-center mb-5">
+			<h2 class="fw-bold">Nuestros Servicios</h2>
+			<p class="text-muted-custom">Soluciones integrales para toda la familia</p>
+		</div>
+		<div class="row g-4">
+			<div class="col-md-4">
+				<div class="card h-100 p-4 text-center">
+					<div class="card-body">
+						<span class="material-symbols-outlined service-icon">cleaning_services</span>
+						<h5 class="card-title fw-bold">Limpieza Dental</h5>
+						<p class="card-text text-muted-custom">Mantén tus dientes sanos y brillantes con nuestras limpiezas profundas.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card h-100 p-4 text-center">
+					<div class="card-body">
+						<span class="material-symbols-outlined service-icon">orthopedics</span>
+						<h5 class="card-title fw-bold">Ortodoncia</h5>
+						<p class="card-text text-muted-custom">Alineación perfecta para una sonrisa funcional y estética para niños y adultos.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card h-100 p-4 text-center">
+					<div class="card-body">
+						<span class="material-symbols-outlined service-icon">masks</span>
+						<h5 class="card-title fw-bold">Implantes</h5>
+						<p class="card-text text-muted-custom">Soluciones duraderas y naturales para piezas faltantes con la mejor tecnología.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="py-5" id="profesionales">
+	<div class="container py-5">
+		<div class="text-center mb-5">
+			<h2 class="fw-bold">Nuestros Profesionales</h2>
+			<p class="text-muted-custom">Expertos dedicados a tu salud dental</p>
+		</div>
+		<div class="row g-4 justify-content-center">
+			<div class="col-md-4 col-lg-3">
+				<div class="card overflow-hidden h-100">
+					<img alt="Dra. Elena Ruiz" class="card-img-top" data-alt="Portrait of female dentist Dra Elena Ruiz" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaL_em-FV0EXBi00hmGLiwxiAc0DpFjQ3pAgjOttUsVikUa0bet1RycbBBWD2VkZVHEcjnpSGcgM6185_6CcG4Z-YR5jfrlYp1Q4ZTlvrFvicemAcxzkV8mZY2q8gy4SEail30jwSYlpgfD8Z71KcAqQ7bMUCSs8KsRZDhEhlrCI0ZCVzfd2RjtXWZ3tJO2BeAoZzsYAeI0X060_zGkM58QbRA8GRXEli2wGI3S23WXK0Y_H2O3IgSeUWDTS5qzy0YGJyxEGh9TrpS" style="height: 250px; object-fit: cover;" />
+					<div class="card-body text-center">
+						<h6 class="fw-bold mb-1">Dra. Elena Ruiz</h6>
+						<p class="text-primary small mb-0">Especialista en Ortodoncia</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3">
+				<div class="card overflow-hidden h-100">
+					<img alt="Dr. Carlos Sosa" class="card-img-top" data-alt="Portrait of male dentist Dr Carlos Sosa" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVCmCRMfqk0Gz8oRH2UVQQ_MRbxDo2JUgt5EDsr1DNVSerFb4B27XLsw8IsCMrOdV__NhYykHgffan1y-irVEm9PlQWU0wklkiCIY4zWdN2-ZGF-Laqj0ihJaiSwho-hshK3zMvQL-QScqESIAvQlbS3Ra7WT4BG5MyYdJvpQFuYgcsLzXehAI2upwKuCbZfDzYoHd0POg9ZzUp99My-xy5oNNz-BFKLBM6Bh1NN2AZDUBhkFh_6BTn9ltVoHqIa5gkgtzT5Av9kdP" style="height: 250px; object-fit: cover;" />
+					<div class="card-body text-center">
+						<h6 class="fw-bold mb-1">Dr. Carlos Sosa</h6>
+						<p class="text-primary small mb-0">Cirujano Implantólogo</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3">
+				<div class="card overflow-hidden h-100">
+					<img alt="Dra. Laura Méndez" class="card-img-top" data-alt="Portrait of female dentist Dra Laura Méndez" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoYKqzBoGwdOP_07iEvlWK1EGhmj1S-U-669CRQERWqiSNPiqTiSxJEbPE-lmM4G2zP9YoipabtcatPMqeeR2PUAa9a2G3VlAkrCz-plT_VKh6mc6f_zfVuktpDIlslKuXUsWdtJsV1UBmzbL70nTb7_qzxESsdElthPwIrRFHFPwdacomjouvX63bG2iUW6m9mIdaP_1ttJFXAoYPTdoxCDo0f2mg24wrRA6tpjaS7L8Lv8i7Ju0MN5RklN53Ubia7tDtRbCoSyI3" style="height: 250px; object-fit: cover;" />
+					<div class="card-body text-center">
+						<h6 class="fw-bold mb-1">Dra. Laura Méndez</h6>
+						<p class="text-primary small mb-0">Odontología General</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="py-5 bg-primary text-white">
+
+	<div class="text-center mb-5">
+		<h2 class="fw-bold text-white">¿Cómo reservar tu turno?</h2>
+		<p class="opacity-75">Sigue estos tres sencillos pasos</p>
+	</div>
+	<div class="row g-4 text-center">
+		<div class="col-md-4">
+			<div class="step-number">1</div>
+			<h5 class="fw-bold">Elige tu Servicio</h5>
+			<p class="opacity-75">Selecciona el tratamiento que necesitas de nuestra lista de servicios.</p>
+		</div>
+		<div class="col-md-4">
+			<div class="step-number">2</div>
+			<h5 class="fw-bold">Selecciona Fecha</h5>
+			<p class="opacity-75">Busca en nuestro calendario el día y la hora que mejor te convenga.</p>
+		</div>
+		<div class="col-md-4">
+			<div class="step-number">3</div>
+			<h5 class="fw-bold">Confirma y Asiste</h5>
+			<p class="opacity-75">Recibirás un recordatorio por correo. ¡Te esperamos en la clínica!</p>
+		</div>
+		<div class="d-grid d-md-flex gap-3 justify-content-center">
+			<button class="btn btn-primary btn-lg px-5">Reservar Turno</button>
+		</div>
+	</div>
+
+</section>

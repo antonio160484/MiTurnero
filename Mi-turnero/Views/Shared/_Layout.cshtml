@@ -1,53 +1,117 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Mi_turnero</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Mi_turnero.styles.css" asp-append-version="true" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Mi_turnero</title>
+	<script type="importmap"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/Mi_turnero.styles.css" asp-append-version="true" />
+
+   
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Mi_turnero</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Especialidad" asp-action="Index">Especilidades</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+	<header>
+		<nav class="navbar navbar-expand-lg sticky-top py-3">
+			<div class="container-fluid">
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+					
+					<span>DentalCare</span>
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a class="nav-link text-dark fw-medium" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark fw-medium" asp-area="" asp-controller="Home" asp-action="Privacy">Servicios</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark fw-medium" asp-area="" asp-controller="Home" asp-action="Privacy">Profesionales</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark fw-medium" asp-area="" asp-controller="Especialidad" asp-action="Index">Especilidades</a>
+						</li>
+						<li class="nav-item ms-lg-2">
+							<a class="btn btn-primary px-4 py-2" href="#">Portal Paciente</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Mi_turnero - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+
+	</header>
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+
+	<footer class="footer" id="contacto">
+		<div class="container">
+			<div class="row g-4 mb-5">
+				<div class="col-lg-4">
+					<div class="d-flex align-items-center gap-2 fw-bold mb-4">
+						<span class="material-symbols-outlined text-primary">dentistry</span>
+						<span class="fs-4 text-white">DentalCare</span>
+					</div>
+					<p class="text-muted-custom">Cuidando de tu salud bucal con profesionalismo y la última tecnología dental.</p>
+				</div>
+				<div class="col-lg-2 col-md-4">
+					<h6 class="fw-bold mb-4 text-white">Links Rápidos</h6>
+					<ul class="list-unstyled">
+						<li class="mb-2"><a class="text-decoration-none text-muted-custom" href="#">Inicio</a></li>
+						<li class="mb-2"><a class="text-decoration-none text-muted-custom" href="#">Servicios</a></li>
+						<li class="mb-2"><a class="text-decoration-none text-muted-custom" href="#">Profesionales</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-3 col-md-4">
+					<h6 class="fw-bold mb-4 text-white">Contacto</h6>
+					<ul class="list-unstyled">
+						<li class="mb-2 d-flex align-items-center gap-2 text-muted-custom">
+							<span class="material-symbols-outlined fs-5">call</span> +1 234 567 890
+						</li>
+						<li class="mb-2 d-flex align-items-center gap-2 text-muted-custom">
+							<span class="material-symbols-outlined fs-5">mail</span> info@dentalcare.com
+						</li>
+						<li class="mb-2 d-flex align-items-center gap-2 text-muted-custom">
+							<span class="material-symbols-outlined fs-5">location_on</span> Av. Principal 123, Ciudad
+						</li>
+					</ul>
+				</div>
+				<div class="col-lg-3 col-md-4">
+					<h6 class="fw-bold mb-4 text-white">Redes Sociales</h6>
+					<div class="d-flex gap-3">
+						<a class="btn btn-outline-primary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="#" style="width: 40px; height: 40px;">
+							<span class="material-symbols-outlined fs-5">public</span>
+						</a>
+						<a class="btn btn-outline-primary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="#" style="width: 40px; height: 40px;">
+							<span class="material-symbols-outlined fs-5">share</span>
+						</a>
+						<a class="btn btn-outline-primary btn-sm rounded-circle d-flex align-items-center justify-content-center" href="#" style="width: 40px; height: 40px;">
+							<span class="material-symbols-outlined fs-5">thumb_up</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="border-top pt-4 text-center">
+				<p class="text-muted-custom small mb-0">© 2026 DentalCare. Todos los derechos reservados.</p>
+			</div>
+		</div>
+	</footer>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
