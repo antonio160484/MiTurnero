@@ -1,10 +1,11 @@
 ﻿using Mi_turnero.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mi_turnero.Data
 {
-    public class MiTurneroDbContext : IdentityDbContext<Usuario>
+    public class MiTurneroDbContext : IdentityDbContext<Usuario, IdentityRole, string>
     {
         public MiTurneroDbContext(DbContextOptions<MiTurneroDbContext>options): base(options)
         {

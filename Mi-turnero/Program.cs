@@ -1,5 +1,8 @@
 using Mi_turnero.Data;
+using Mi_turnero.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +12,29 @@ builder.Services.AddControllersWithViews();
 // incluir dbcontext
 builder.Services.AddDbContext<MiTurneroDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TurneroDbContext")));
+
+// Incluir Identity
+builder.Services.AddIdentity<Usuario, IdentityRole>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 3;
+})
+.AddEntityFrameworkStores<MiTurneroDbContext>()
+.AddDefaultTokenProviders();
+
+
+
+
+builder.Services.ConfigureApplicationCookie(o =>
+{
+    o.LoginPath = "/Usuario/Login";
+    o.AccessDeniedPath = "/Usuario/AccessDenied";
+    o.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    o.SlidingExpiration = true;
+});
+
 
 
 var app = builder.Build();
@@ -23,6 +49,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
 
 app.UseAuthorization();
 
