@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Mi_turnero.Data;
 using Mi_turnero.Models;
 using Microsoft.AspNetCore.Identity;
+using Mi_turnero.ViewModels;
 
 namespace Mi_turnero.Controllers
 {
@@ -15,8 +16,8 @@ namespace Mi_turnero.Controllers
     {
         private readonly MiTurneroDbContext _context;
         private readonly UserManager<Usuario> _userManager;
-       
-        public ProfesionalController(MiTurneroDbContext context, UserManager<Usuario>usuario)
+
+        public ProfesionalController(MiTurneroDbContext context, UserManager<Usuario> usuario)
         {
             _context = context;
             _userManager = usuario;
@@ -52,6 +53,19 @@ namespace Mi_turnero.Controllers
         public IActionResult Create()
         {
             ViewData["EspecialidadId"] = new SelectList(_context.Especialidades, "Id", "Nombre");
+            ViewData["DuracionTurno"] = new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem { Value = "00:15:00", Text = "15 minutos" },
+                new SelectListItem { Value = "00:30:00", Text = "30 minutos" },
+                new SelectListItem { Value = "00:45:00", Text = "45 minutos" },
+                new SelectListItem { Value = "01:00:00", Text = "1 hora" }
+            }, "Value", "Text");
+            ViewData["DiaSemana"] = new SelectList(Enum.GetValues(typeof(Mi_turnero.Enums.DiaSemana))
+                .Cast<Mi_turnero.Enums.DiaSemana>().Select(d => new SelectListItem
+                {
+                    Value = ((int)d).ToString(),
+                    Text = d.ToString()
+                }), "Value", "Text");
             return View();
         }
 
@@ -60,16 +74,83 @@ namespace Mi_turnero.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UsuarioId,Matricula,EspecialidadId,Telefono,DuracionTurno,Activo")] Profesional profesional)
+        public async Task<IActionResult> Create(AltaProfesionalVM profesional)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(profesional);
+                ViewBag.EspecialidadId = new SelectList(
+            await _context.Especialidades.ToListAsync(),
+            "Id",
+            "Nombre",
+            profesional.EspecialidadId // ← Valor seleccionado previamente
+            );
+
+                ViewBag.DuracionTurno = new SelectList(
+                   new List<SelectListItem>
+            {
+                new SelectListItem { Value = "00:15:00", Text = "15 minutos" },
+                new SelectListItem { Value = "00:30:00", Text = "30 minutos" },
+                new SelectListItem { Value = "00:45:00", Text = "45 minutos" },
+                new SelectListItem { Value = "01:00:00", Text = "1 hora" }
+            }, "Value", "Text");
+                ViewBag.DiaSemana = new SelectList(
+                  Enum.GetValues(typeof(Mi_turnero.Enums.DiaSemana))
+                .Cast<Mi_turnero.Enums.DiaSemana>().Select(d => new SelectListItem
+                {
+                    Value = ((int)d).ToString(),
+                    Text = d.ToString()
+                }), "Value", "Text");
+                return View(profesional);
+            }
+
+            var user = new Usuario
+            {
+                UserName = profesional.Email,
+                Email = profesional.Email,
+                Nombre = profesional.Nombre,
+                Apellido = profesional.Apellido
+            };
+
+            var result = await _userManager.CreateAsync(user, profesional.Password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "Profesional");
+
+                var nuevoProfesional = new Profesional
+                {
+                    UsuarioId = user.Id,
+                    Matricula = profesional.Matricula,
+                    EspecialidadId = profesional.EspecialidadId,
+                    Telefono = profesional.Telefono,
+                    DuracionTurno = profesional.DuracionTurno,
+                    Activo = true,
+                };
+                _context.Profesionales.Add(nuevoProfesional);
                 await _context.SaveChangesAsync();
+
+                foreach (var horario in profesional.TurnosTrabajo)
+                {
+                    var turnoTrabajo = new TurnoTrabajo
+                    {
+
+                        Dia = horario.Dia,
+                        HoraInicio = horario.HoraInicio,
+                        HoraFin = horario.HoraFin
+                    };
+
+                    _context.TurnosTrabajo.Add(turnoTrabajo);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EspecialidadId"] = new SelectList(_context.Especialidades, "Id", "Nombre", profesional.EspecialidadId);
-            return View(profesional);
+            await _context.SaveChangesAsync();
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+            return View();
         }
 
         // GET: Profesionals/Edit/5

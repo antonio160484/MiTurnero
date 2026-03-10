@@ -1,7 +1,7 @@
 ﻿@model Mi_turnero.ViewModels.AltaProfesionalVM
 
 @{
-    ViewData["Title"] = "Create";
+	ViewData["Title"] = "Create";
 }
 
 <h1>Create</h1>
@@ -9,60 +9,186 @@
 <h4>Profesional</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           <!--agregar nombre y apellido-->
-           <div class="form-group">
-               <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-			<div class="form-group>
-                <label asp-for="Apellido" class="control-label"></label>
-                <input asp-for="Apellido" class="form-control" />
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<!--agregar nombre y apellido-->
+			<div class="form-group">
+				<label asp-for="Nombre" class="control-label"></label>
+				<input asp-for="Nombre" class="form-control" />
+				<span asp-validation-for="Nombre" class="text-danger"></span>
+			</div>
+			<div class="form-group" ">
+				<label asp-for="Apellido" class="control-label"></label>
+				<input asp-for="Apellido" class="form-control" />
 				<span asp-validation-for="Apellido" class="text-danger"></span>
-           </div>
-            <div class="form-group">
-                <label asp-for="Matricula" class="control-label"></label>
-                <input asp-for="Matricula" class="form-control" />
-                <span asp-validation-for="Matricula" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EspecialidadId" class="control-label"></label>
-                <select asp-for="EspecialidadId" class ="form-control" asp-items="ViewBag.EspecialidadId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefono" class="control-label"></label>
-                <input asp-for="Telefono" class="form-control" />
-                <span asp-validation-for="Telefono" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            <div class="form-group">
-                <label asp-for="DuracionTurno" class="control-label"></label>
-                <input asp-for="DuracionTurno" class="form-control" />
-                <span asp-validation-for="DuracionTurno" class="text-danger"></span>
-            </div>
-           
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+			</div>
+			<div class="form-group">
+				<label asp-for="Matricula" class="control-label"></label>
+				<input asp-for="Matricula" class="form-control" />
+				<span asp-validation-for="Matricula" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="EspecialidadId" class="control-label"></label>
+				<select asp-for="EspecialidadId" class="form-control" asp-items="ViewBag.EspecialidadId">
+					<option value="">Seleccione...</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label asp-for="Telefono" class="control-label"></label>
+				<input asp-for="Telefono" class="form-control" />
+				<span asp-validation-for="Telefono" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Email" class="control-label"></label>
+				<input asp-for="Email" class="form-control" />
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Password" class="control-label"></label>
+				<input asp-for="Password" class="form-control" />
+				<span asp-validation-for="Password" class="text-danger"></span>
+			</div>
+			<div class="card mt-4">
+				<div class="card-header">
+					<h5>Horarios de Atención</h5>
+				</div>
+
+				<div class="card-body">
+
+					<div class="row g-3">
+
+						<div class="col-md-4">
+							<label>Día</label>
+							<select id="diaSemana" class="form-select"
+									asp-items="ViewBag.DiaSemana">
+								<option value="">Seleccione...</option>
+							</select>
+						</div>
+
+						<div class="col-md-4">
+							<label>Desde</label>
+							<input type="time" id="HoraInicio" class="form-control" />
+						</div>
+
+						<div class="col-md-4">
+							<label>Hasta</label>
+							<input type="time" id="HoraFin" class="form-control" />
+						</div>
+
+						
+
+					</div>
+					<div class="col-md-4 justify-content-end">
+						<button type="button"
+								class="btn btn-secondary justify-content-end"
+								onclick="agregarHorario()">
+							Agregar
+						</button>
+					</div>
+
+					<hr />
+
+					<table class="table table-bordered mt-3" id="tablaHorarios">
+						<thead class="table-light">
+							<tr>
+								<th>Día</th>
+								<th>Desde</th>
+								<th>Hasta</th>
+								<th style="width:120px">Acción</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							
+
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="DuracionTurno" class="control-label">Duracion del turno </label>
+				<select asp-for="DuracionTurno" class="form-control" asp-items="ViewBag.DuracionTurno">
+					<option value="">Seleccione...</option>
+				</select>
+				<span asp-validation-for="DuracionTurno" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<input type="submit" value="Crear Medico" class="btn btn-primary" />
+				<a asp-action="Index" class="btn btn-secondary">Volver</a>
+			</div>
+
+		</form>
+	</div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script>
+
+	let indexHorario = 0
+
+	function agregarHorario(){
+
+		const dia = document.getElementById("diaSemana");
+		const horaInicio = document.getElementById("HoraInicio");
+		const horaFin = document.getElementById("HoraFin");
+
+		if(!dia.value || !horaInicio.value || !horaFin.value){
+			alert("Complete todos los campos del horario");
+			return;
+		}
+
+		if(horaInicio.value >= horaFin.value){
+			alert("La hora de inicio debe ser menor a la hora de fin");
+			return;
+		}
+
+		const tabla = document
+			.getElementById("tablaHorarios")
+			.getElementsByTagName("tbody")[0];
+
+		const fila = tabla.insertRow();
+
+		fila.innerHTML = `
+			<td>${dia.options[dia.selectedIndex].text}</td>
+			<td>${horaInicio.value}</td>
+			<td>${horaFin.value}</td>
+
+			<td>
+				<button type="button"
+						class="btn btn-danger btn-sm"
+						onclick="eliminarFila(this)">
+					Eliminar
+				</button>
+			</td>
+
+			<input type="hidden"
+				   name="TurnosTrabajo[${indexHorario}].DiaSemana"
+				   value="${dia.value}" />
+
+			<input type="hidden"
+				   name="TurnosTrabajo[${indexHorario}].HoraInicio"
+				   value="${horaInicio.value}" />
+
+			<input type="hidden"
+				   name="TurnosTrabajo[${indexHorario}].HoraFin"
+				   value="${horaFin.value}" />
+		`;
+
+		indexHorario++;
+
+	}
+
+	function eliminarFila(btn){
+		btn.closest("tr").remove();
+	}
+
+</script>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }

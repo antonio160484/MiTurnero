@@ -10,7 +10,7 @@ namespace Mi_turnero.ViewModels
         public int EspecialidadId { get; set; }
         public string? Telefono { get; set; }
         public string? Email { get; set; }
-        public string? Password { get; set; }
+        public string Password { get; set; }
         public List<TurnoTrabajo> TurnosTrabajo { get; set; } = new List<TurnoTrabajo>();
         public TimeSpan? DuracionTurno { get; set; }
     }
