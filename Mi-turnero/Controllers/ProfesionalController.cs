@@ -86,13 +86,14 @@ namespace Mi_turnero.Controllers
             );
 
                 ViewBag.DuracionTurno = new SelectList(
-                   new List<SelectListItem>
-            {
+                       new List<SelectListItem>
+                {
                 new SelectListItem { Value = "00:15:00", Text = "15 minutos" },
                 new SelectListItem { Value = "00:30:00", Text = "30 minutos" },
                 new SelectListItem { Value = "00:45:00", Text = "45 minutos" },
                 new SelectListItem { Value = "01:00:00", Text = "1 hora" }
-            }, "Value", "Text");
+                }, "Value", "Text");
+
                 ViewBag.DiaSemana = new SelectList(
                   Enum.GetValues(typeof(Mi_turnero.Enums.DiaSemana))
                 .Cast<Mi_turnero.Enums.DiaSemana>().Select(d => new SelectListItem
@@ -124,7 +125,7 @@ namespace Mi_turnero.Controllers
                     EspecialidadId = profesional.EspecialidadId,
                     Telefono = profesional.Telefono,
                     DuracionTurno = profesional.DuracionTurno,
-                    Activo = true,
+                   
                 };
                 _context.Profesionales.Add(nuevoProfesional);
                 await _context.SaveChangesAsync();
@@ -133,7 +134,7 @@ namespace Mi_turnero.Controllers
                 {
                     var turnoTrabajo = new TurnoTrabajo
                     {
-
+                        ProfesionalId = horario.ProfesionalId,
                         Dia = horario.Dia,
                         HoraInicio = horario.HoraInicio,
                         HoraFin = horario.HoraFin

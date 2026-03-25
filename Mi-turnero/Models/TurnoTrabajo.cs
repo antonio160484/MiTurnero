@@ -7,6 +7,10 @@ namespace Mi_turnero.Models
     {
         public int Id { get; set; }
         [Required (ErrorMessage = "El día de la semana es obligatorio.")]
+
+        public string ProfesionalId { get; set; } = null!;
+        public Profesional Profesional { get; set; } = null!;
+
         public DiaSemana Dia { get; set; }
         [Required (ErrorMessage = "La hora de inicio es obligatoria.")]
         

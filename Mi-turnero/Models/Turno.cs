@@ -8,7 +8,7 @@ namespace Mi_turnero.Models
         public int Id { get; set; }
         public string ProfesionalId { get; set; }
         [Required (ErrorMessage = "Debe seleccionar un Profesional")]
-        public Profesional Medico { get; set; }
+        public Profesional Profesional { get; set; }
         public string PacienteId { get; set; }
         public Paciente Paciente { get; set; }
         [DataType(DataType.Date)]

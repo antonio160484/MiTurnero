@@ -131,55 +131,53 @@
 
 	function agregarHorario(){
 
-		const dia = document.getElementById("diaSemana");
-		const horaInicio = document.getElementById("HoraInicio");
-		const horaFin = document.getElementById("HoraFin");
+    const dia = document.getElementById("diaSemana");
+    const horaInicio = document.getElementById("HoraInicio");
+    const horaFin = document.getElementById("HoraFin");
 
-		if(!dia.value || !horaInicio.value || !horaFin.value){
-			alert("Complete todos los campos del horario");
-			return;
-		}
+    if(!dia.value || !horaInicio.value || !horaFin.value){
+        alert("Complete todos los campos del horario");
+        return;
+    }
 
-		if(horaInicio.value >= horaFin.value){
-			alert("La hora de inicio debe ser menor a la hora de fin");
-			return;
-		}
+    if(horaInicio.value >= horaFin.value){
+        alert("La hora de inicio debe ser menor a la hora de fin");
+        return;
+    }
 
-		const tabla = document
-			.getElementById("tablaHorarios")
-			.getElementsByTagName("tbody")[0];
+    const tabla = document
+        .getElementById("tablaHorarios")
+        .getElementsByTagName("tbody")[0];
 
-		const fila = tabla.insertRow();
+    const fila = tabla.insertRow();
 
-		fila.innerHTML = `
-			<td>${dia.options[dia.selectedIndex].text}</td>
-			<td>${horaInicio.value}</td>
-			<td>${horaFin.value}</td>
+    // CORRECCIÓN: Los inputs <input type="hidden"> deben ir DENTRO de un <td>.
+    // Además, el nombre debe ser "Dia" si así se llama en tu modelo (TurnoTrabajo.cs).
+    fila.innerHTML = `
+        <td>
+            ${dia.options[dia.selectedIndex].text}
+            <input type="hidden" name="TurnosTrabajo[${indexHorario}].Dia" value="${dia.value}" />
+        </td>
+        <td>
+            ${horaInicio.value}
+            <input type="hidden" name="TurnosTrabajo[${indexHorario}].HoraInicio" value="${horaInicio.value}:00" />
+        </td>
+        <td>
+            ${horaFin.value}
+            <input type="hidden" name="TurnosTrabajo[${indexHorario}].HoraFin" value="${horaFin.value}:00" />
+        </td>
+        <td>
+            <button type="button" class="btn btn-danger btn-sm" onclick="eliminarFila(this)">Eliminar</button>
+        </td>
+    `;
 
-			<td>
-				<button type="button"
-						class="btn btn-danger btn-sm"
-						onclick="eliminarFila(this)">
-					Eliminar
-				</button>
-			</td>
+    indexHorario++;
 
-			<input type="hidden"
-				   name="TurnosTrabajo[${indexHorario}].DiaSemana"
-				   value="${dia.value}" />
-
-			<input type="hidden"
-				   name="TurnosTrabajo[${indexHorario}].HoraInicio"
-				   value="${horaInicio.value}" />
-
-			<input type="hidden"
-				   name="TurnosTrabajo[${indexHorario}].HoraFin"
-				   value="${horaFin.value}" />
-		`;
-
-		indexHorario++;
-
-	}
+    // Opcional: limpiar los campos después de agregar
+    dia.value = "";
+    horaInicio.value = "";
+    horaFin.value = "";
+}
 
 	function eliminarFila(btn){
 		btn.closest("tr").remove();

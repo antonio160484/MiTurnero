@@ -13,5 +13,6 @@ namespace Mi_turnero.ViewModels
         public string Password { get; set; }
         public List<TurnoTrabajo> TurnosTrabajo { get; set; } = new List<TurnoTrabajo>();
         public TimeSpan? DuracionTurno { get; set; }
+        bool Activo { get; set; } = true;
     }
 }

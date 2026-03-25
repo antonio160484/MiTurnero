@@ -11,5 +11,7 @@ namespace Mi_turnero.Models
         [Required]
         [StringLength(50)]
         public string? Apellido { get; set; } = null!;
+        public Profesional? Profesional { get; set; }
+        public Paciente? Paciente { get; set; }
     }
 }

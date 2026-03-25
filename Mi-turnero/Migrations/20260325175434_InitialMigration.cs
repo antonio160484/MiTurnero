@@ -177,7 +177,6 @@ namespace Mi_turnero.Migrations
                 columns: table => new
                 {
                     UsuarioId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UsuarioId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Dni = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FechaNac = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -190,8 +189,8 @@ namespace Mi_turnero.Migrations
                 {
                     table.PrimaryKey("PK_Pacientes", x => x.UsuarioId);
                     table.ForeignKey(
-                        name: "FK_Pacientes_AspNetUsers_UsuarioId1",
-                        column: x => x.UsuarioId1,
+                        name: "FK_Pacientes_AspNetUsers_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -202,7 +201,6 @@ namespace Mi_turnero.Migrations
                 columns: table => new
                 {
                     UsuarioId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UsuarioId1 = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Matricula = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EspecialidadId = table.Column<int>(type: "int", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -213,8 +211,8 @@ namespace Mi_turnero.Migrations
                 {
                     table.PrimaryKey("PK_Profesionales", x => x.UsuarioId);
                     table.ForeignKey(
-                        name: "FK_Profesionales_AspNetUsers_UsuarioId1",
-                        column: x => x.UsuarioId1,
+                        name: "FK_Profesionales_AspNetUsers_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -286,19 +284,20 @@ namespace Mi_turnero.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ProfesionalId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Dia = table.Column<int>(type: "int", nullable: false),
                     HoraInicio = table.Column<TimeSpan>(type: "time", nullable: false),
-                    HoraFin = table.Column<TimeSpan>(type: "time", nullable: false),
-                    ProfesionalUsuarioId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    HoraFin = table.Column<TimeSpan>(type: "time", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TurnosTrabajo", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TurnosTrabajo_Profesionales_ProfesionalUsuarioId",
-                        column: x => x.ProfesionalUsuarioId,
+                        name: "FK_TurnosTrabajo_Profesionales_ProfesionalId",
+                        column: x => x.ProfesionalId,
                         principalTable: "Profesionales",
-                        principalColumn: "UsuarioId");
+                        principalColumn: "UsuarioId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -346,19 +345,9 @@ namespace Mi_turnero.Migrations
                 column: "MedicoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pacientes_UsuarioId1",
-                table: "Pacientes",
-                column: "UsuarioId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Profesionales_EspecialidadId",
                 table: "Profesionales",
                 column: "EspecialidadId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Profesionales_UsuarioId1",
-                table: "Profesionales",
-                column: "UsuarioId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Turnos_PacienteId",
@@ -371,9 +360,9 @@ namespace Mi_turnero.Migrations
                 column: "ProfesionalId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TurnosTrabajo_ProfesionalUsuarioId",
+                name: "IX_TurnosTrabajo_ProfesionalId",
                 table: "TurnosTrabajo",
-                column: "ProfesionalUsuarioId");
+                column: "ProfesionalId");
         }
 
         /// <inheritdoc />

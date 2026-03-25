@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Mi_turnero.Migrations
 {
     [DbContext(typeof(MiTurneroDbContext))]
-    [Migration("20260307194534_InitialMigration")]
+    [Migration("20260325175434_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -102,13 +102,7 @@ namespace Mi_turnero.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UsuarioId1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("UsuarioId");
-
-                    b.HasIndex("UsuarioId1");
 
                     b.ToTable("Pacientes");
                 });
@@ -133,15 +127,9 @@ namespace Mi_turnero.Migrations
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UsuarioId1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("UsuarioId");
 
                     b.HasIndex("EspecialidadId");
-
-                    b.HasIndex("UsuarioId1");
 
                     b.ToTable("Profesionales");
                 });
@@ -211,12 +199,13 @@ namespace Mi_turnero.Migrations
                     b.Property<TimeSpan>("HoraInicio")
                         .HasColumnType("time");
 
-                    b.Property<string>("ProfesionalUsuarioId")
+                    b.Property<string>("ProfesionalId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProfesionalUsuarioId");
+                    b.HasIndex("ProfesionalId");
 
                     b.ToTable("TurnosTrabajo");
                 });
@@ -443,8 +432,8 @@ namespace Mi_turnero.Migrations
             modelBuilder.Entity("Mi_turnero.Models.Paciente", b =>
                 {
                     b.HasOne("Mi_turnero.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId1")
+                        .WithOne("Paciente")
+                        .HasForeignKey("Mi_turnero.Models.Paciente", "UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -460,8 +449,8 @@ namespace Mi_turnero.Migrations
                         .IsRequired();
 
                     b.HasOne("Mi_turnero.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId1")
+                        .WithOne("Profesional")
+                        .HasForeignKey("Mi_turnero.Models.Profesional", "UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -478,22 +467,26 @@ namespace Mi_turnero.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Mi_turnero.Models.Profesional", "Medico")
+                    b.HasOne("Mi_turnero.Models.Profesional", "Profesional")
                         .WithMany("Turnos")
                         .HasForeignKey("ProfesionalId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Medico");
-
                     b.Navigation("Paciente");
+
+                    b.Navigation("Profesional");
                 });
 
             modelBuilder.Entity("Mi_turnero.Models.TurnoTrabajo", b =>
                 {
-                    b.HasOne("Mi_turnero.Models.Profesional", null)
+                    b.HasOne("Mi_turnero.Models.Profesional", "Profesional")
                         .WithMany("TurnosTrabajo")
-                        .HasForeignKey("ProfesionalUsuarioId");
+                        .HasForeignKey("ProfesionalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profesional");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -559,6 +552,13 @@ namespace Mi_turnero.Migrations
                     b.Navigation("Turnos");
 
                     b.Navigation("TurnosTrabajo");
+                });
+
+            modelBuilder.Entity("Mi_turnero.Models.Usuario", b =>
+                {
+                    b.Navigation("Paciente");
+
+                    b.Navigation("Profesional");
                 });
 #pragma warning restore 612, 618
         }
